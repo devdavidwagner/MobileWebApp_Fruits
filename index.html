@@ -1,0 +1,227 @@
+<!--
+Mobile web development
+Fruit App
+Created by: David Wagner
+email:      david.karl.wagner@live.com
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fruit app with database CRUD</title>
+    <!--jQuery -->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <!--jQuery Mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <!--jQuery Validation-->
+    <script src="js/lib/jquery.validate.js"></script>
+    <!--jQuery mobile style-->
+    <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+
+    <!--Our stuff-->
+    <script src="js/database.js"></script>
+    <script src="js/fruitDAL.js"></script>
+    <script src="js/fruitFacade.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/global.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/myStyle.css">
+
+</head>
+<body>
+<!--home page-->
+<div id="pageHome" data-role="page">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Home </h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#pageHome" data-icon="home" class="ui-btn-active ui-state-persist">Home</a></li>
+                <li><a href="#pageAdd" data-icon="plus">Add Fruit</a></li>
+                <li><a href="#fruitPage" data-icon="grid">Fruits</a></li>
+                <li><a href="#settingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <section data-role="content">
+        <h2 align="center">FRUITS</h2>
+        <p align="center">
+            <img src="img/fruitBanner.png" width="80%" height="80%" alt="Avengers">
+        </p>
+        <h3>Let's get fruity!</h3>
+        <p>Create fruits! Make all kinds!</p>
+
+
+
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h1>&copy; David Wagner</h1>
+    </footer>
+</div>
+
+<!--Add fruit page-->
+<div id="pageAdd" data-role="page">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Add a Fruit </h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#pageHome" data-icon="home">Home</a></li>
+                <li><a href="#pageAdd" data-icon="plus" class="ui-btn-active ui-state-persist">Add Fruit</a>
+                </li>
+                <li><a href="#fruitPage" data-icon="grid">Fruits</a></li>
+                <li><a href="#settingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <section data-role="content">
+        <div>
+            <h2 align="center">Add a Fruit</h2>
+            <form id="frmAddFruit" name="frmAddFruit">
+                <label for="fruitName">Fruit Name: </label>
+                <input type ="text" id ="fruitName" name ="fruitName">
+
+                <fieldset data-role="controlgroup" data-type="vertical">
+                    <label for="Berry">Berry</label>
+                <input type="radio"  name ="fruitType" class ="fruitType" id ="Berry" value ="Berry">
+                    <label for="Citrus">Citrus </label>
+                <input type="radio" name ="fruitType" class ="fruitType" id ="Citrus" value ="Citrus">
+                    <label for="Melon">Melon </label>
+                <input type="radio"  name ="fruitType" class ="fruitType" id ="Melon" value ="Melon">
+                    <label for="Apple">Apple </label>
+                <input type="radio" name ="fruitType" class ="fruitType"  id ="Apple" value ="Apple">
+
+                </fieldset><br>
+                <span id="fruitChoice"></span>
+
+                <button type="button" data-role="button" id="btnAdd" name="btnAdd"
+                        data-icon="plus" data-iconpos="left">Add
+                </button>
+            </form>
+
+
+
+        </div>
+
+
+
+
+        <div>
+
+
+
+        </div>
+
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h1>&copy; David Wagner</h1>
+    </footer>
+</div>
+
+<!--Fruits page-->
+<div id="fruitPage" data-role="page">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Fruits </h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#pageHome" data-icon="home">Home</a></li>
+                <li><a href="#pageAdd" data-icon="plus">Add Fruits</a></li>
+                <li><a href="#fruitPage" data-icon="grid" class="ui-btn-active ui-state-persist">Fruits</a>
+                </li>
+                <li><a href="#settingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <section data-role="content">
+        <h2 align="center">Fruits</h2>
+        <ul id="fruitList" data-role="listview">
+
+
+        </ul>
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h1>&copy; David Wagner</h1>
+    </footer>
+</div>
+
+<!--edit fruit page (hidden)-->
+<div id="editFruit" data-role="page">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Edit a Fruit</h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#pageHome" data-icon="home">Home</a></li>
+                <li><a href="#pageAdd" data-icon="plus">Add Fruit</a></li>
+                <li><a href="#fruitPage" data-icon="grid" class="ui-btn-active ui-state-persist">Fruits</a>
+                </li>
+                <li><a href="#settingsPage" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <section data-role="content">
+        <div>
+            <h2 align="center">Edit a Fruit</h2>
+            <form id="frmEditFruit" name="frmEditFruit">
+                <label for="fruitNameEdit">Fruit Name: </label>
+                <input type ="text" id ="fruitNameEdit" name ="fruitNameEdit">
+
+                <fieldset data-role="controlgroup" data-type="vertical">
+                    <label for="BerryEdit">Berry</label>
+                    <input type="radio"  name ="fruitType" class ="fruitTypeEdit" id ="BerryEdit" value ="Berry">
+                    <label for="CitrusEdit">Citrus </label>
+                    <input type="radio" name ="fruitType" class ="fruitTypeEdit" id ="CitrusEdit" value ="Citrus">
+                    <label for="MelonEdit">Melon </label>
+                    <input type="radio"  name ="fruitType" class ="fruitTypeEdit" id ="MelonEdit" value ="Melon">
+                    <label for="AppleEdit">Apple </label>
+                    <input type="radio" name ="fruitType" class ="fruitTypeEdit"  id ="AppleEdit" value ="Apple">
+
+                </fieldset><br>
+                <span id="fruitChoiceEdit"></span>
+
+                <button type="button" data-role="button" data-theme="b" id="btnEdit" name="btnEdit"
+                        data-icon="plus" data-iconpos="left">Edit Fruit
+                </button>
+                <button type="button" data-role="button" data-theme="b" id="btnDelete" name="btnDelete"
+                        data-icon="delete" data-iconpos="left">Delete Fruit!
+                </button>
+            </form>
+        </div>
+
+
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h1>&copy; David Wagner</h1>
+    </footer>
+</div>
+
+<!--settings page-->
+<div id="settingsPage" data-role="page">
+    <header data-role="header" data-theme="b" data-position="fixed">
+        <h1>Settings</h1>
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li><a href="#pageHome" data-icon="home">Home</a></li>
+                <li><a href="#pageAdd" data-icon="plus">Add Fruits</a></li>
+                <li><a href="#fruitPage" data-icon="grid">Fruits</a></li>
+                <li><a href="#settingsPage" data-icon="gear" class="ui-btn-active ui-state-persist">Settings</a>
+                </li>
+            </ul>
+        </div>
+
+    </header>
+    <section data-role="content">
+
+        <button type="button" id="btnClearDatabase" name="btnClearDatabase" data-icon="delete"
+                data-iconpos="left" style="background-color:red">Clear Database
+        </button>
+
+    </section>
+    <footer data-role="footer" data-theme="b" data-position="fixed">
+        <h1>&copy; David Wagner</h1>
+    </footer>
+</div>
+
+</body>
+</html>

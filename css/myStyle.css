@@ -1,0 +1,11 @@
+label.error{
+
+    color: red;
+    font-weight: bold;
+
+}
+
+input.error {
+
+    border: 22px solid pink;
+}
